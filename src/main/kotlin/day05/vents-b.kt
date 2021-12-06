@@ -24,36 +24,24 @@ fun main() {
             (t..b).forEach { y -> map[y][line.x1] += 1 } // line from top to bottom
         } else {
             if (line.x2 > line.x1 && line.y2 > line.y1) { // top left -> bottom right
-                var x = line.x1
-                var y = line.y1
-                while(x <= line.x2) {
-                    map[y][x] += 1
-                    x += 1
-                    y += 1
+                paintLine(line, map,
+                    { a, b -> a <= b }) { x, y ->
+                    Pair(x + 1, y + 1)
                 }
             } else if (line.x1 > line.x2 && line.y1 > line.y2) { // bottom right -> top left
-                var x = line.x1
-                var y = line.y1
-                while(x >= line.x2) {
-                    map[y][x] += 1
-                    x -= 1
-                    y -= 1
+                paintLine(line, map,
+                    { a, b -> a >= b }) { x, y ->
+                    Pair(x - 1, y - 1)
                 }
             } else if (line.x1 > line.x2 && line.y2 > line.y1) { // top right -> bottom left
-                var x = line.x1
-                var y = line.y1
-                while(x >= line.x2) {
-                    map[y][x] += 1
-                    x -= 1
-                    y += 1
+                paintLine(line, map,
+                    { a, b -> a >= b }) { x, y ->
+                    Pair(x - 1, y + 1)
                 }
             } else { // bottom left -> top right
-                var x = line.x1
-                var y = line.y1
-                while(x <= line.x2) {
-                    map[y][x] += 1
-                    x += 1
-                    y -= 1
+                paintLine(line, map,
+                    { a, b -> a <= b }) { x, y ->
+                    Pair(x + 1, y - 1)
                 }
             }
         }
@@ -66,4 +54,20 @@ fun main() {
 
     val dangerous = map.flatMap { it.asList() }.count { it >= 2 }
     println("dangerous: $dangerous")
+}
+
+private fun paintLine(
+    line: Line,
+    map: Array<IntArray>,
+    compare: (x: Int, x2: Int) -> Boolean,
+    move: (x: Int, y: Int) -> Pair<Int, Int>
+) {
+    var x = line.x1
+    var y = line.y1
+    while (compare(x, line.x2)) {
+        map[y][x] += 1
+        val p = move(x, y)
+        x = p.first
+        y = p.second
+    }
 }
