@@ -14,4 +14,14 @@ class WhaleTest : FunSpec({
         val inputRawLines = ClassLoader.getSystemResource("day07/input.txt").readText()
         calculateLeastFuel(inputRawLines) shouldBe 356179
     }
+
+    test("calculateLeastFuelCrabStyle sample") {
+        val inputRawLines = ClassLoader.getSystemResource("day07/sample.txt").readText()
+        calculateLeastFuelCrabStyle(inputRawLines) shouldBe 168
+    }
+
+    test("calculateLeastFuelCrabStyle input") {
+        val inputRawLines = ClassLoader.getSystemResource("day07/input.txt").readText()
+        calculateLeastFuelCrabStyle(inputRawLines) shouldBe 99788435L
+    }
 })
