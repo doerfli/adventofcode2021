@@ -4,8 +4,14 @@ import java.lang.Integer.max
 import java.lang.Integer.min
 
 fun main() {
-    val inputRawLines = ClassLoader.getSystemResource("day05/input.txt").readText()
-        .split("\n").filter{ "" != it.trim() }
+    val rawInput = ClassLoader.getSystemResource("day05/input.txt").readText()
+    val dangerous = calculateDangerousAreas(rawInput)
+    println("dangerous: $dangerous")
+}
+
+internal fun calculateDangerousAreas(rawInput: String): Int {
+    val inputRawLines = rawInput
+        .split("\n").filter { "" != it.trim() }
 
     val lines = parseLines(inputRawLines)
     val maxX = lines.maxOf { max(it.x1, it.x2) }
@@ -32,7 +38,7 @@ fun main() {
     }
 
     val dangerous = map.flatMap { it.asList() }.count { it >= 2 }
-    println("dangerous: $dangerous")
+    return dangerous
 }
 
 fun parseLines(input: List<String>): List<Line> {
