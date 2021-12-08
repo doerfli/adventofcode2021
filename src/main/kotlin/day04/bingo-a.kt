@@ -3,7 +3,12 @@ package day04
 import java.util.NoSuchElementException
 
 fun main() {
-    val lines = ClassLoader.getSystemResource("day04/input.txt").readText()
+    val rawInput = ClassLoader.getSystemResource("day04/input.txt").readText()
+    calculateBingoScore(rawInput)
+}
+
+internal fun calculateBingoScore(rawInput: String): Int {
+    val lines = rawInput
         .split("\n")
     val numbers = lines[0].split(',').map { it.toInt() }
     val boards = parseBoards(lines.subList(2, lines.size))
@@ -11,9 +16,11 @@ fun main() {
     val (winningBoard, winningNumber) = play(boards, numbers)
     println("Board won with number $winningNumber")
     println(winningBoard)
-    val sumOfAllUnmarkedNumbers = winningBoard.rows.map { r -> r.filter { !it.marked } }.flatten().map { it.number }.sum()
+    val sumOfAllUnmarkedNumbers =
+        winningBoard.rows.map { r -> r.filter { !it.marked } }.flatten().map { it.number }.sum()
     val score = sumOfAllUnmarkedNumbers * winningNumber
     println("Score: $score")
+    return score
 }
 
 fun play(boards: List<Board>, numbers: List<Int>): Pair<Board, Int> {
