@@ -1,13 +1,18 @@
 package day03
 
 fun main() {
-    val lines = ClassLoader.getSystemResource("day03/input.txt").readText()
+    val rawInput = ClassLoader.getSystemResource("day03/input.txt").readText()
+    calculatePowerConsumption(rawInput)
+}
+
+internal fun calculatePowerConsumption(rawInput: String): Int {
+    val lines = rawInput
         .split("\n")
         .map { it.chars().toArray().map { Char(it).toString() } }
 
     // transpose lines
     val transposed = Array(lines[0].size) { Array(lines.size) { "0" } }
-    for ( x in lines.indices ) {
+    for (x in lines.indices) {
         for (y in lines[x].indices) {
             transposed[y][x] = lines[x][y]
         }
@@ -16,7 +21,7 @@ fun main() {
     var gamma = ""
     var epsilon = ""
 
-    for ( x in transposed ) {
+    for (x in transposed) {
         val groups = x.groupBy { it }
         val zeros = groups["0"]?.size!!
         val ones = groups["1"]?.size!!
@@ -31,9 +36,11 @@ fun main() {
     }
 
     val gammtInt = gamma.toLong().convertBinaryToDecimal()
-    val epsilonInt =epsilon.toLong().convertBinaryToDecimal()
+    val epsilonInt = epsilon.toLong().convertBinaryToDecimal()
     println("gamma $gamma $gammtInt epsilon $epsilon $epsilonInt")
     println(gammtInt * epsilonInt)
+
+    return gammtInt * epsilonInt
 }
 
 fun Long.convertBinaryToDecimal(): Int {

@@ -1,7 +1,13 @@
 package day03
 
 fun main() {
-    val lines = ClassLoader.getSystemResource("day03/input.txt").readText()
+    val rawInput = ClassLoader.getSystemResource("day03/input.txt").readText()
+    calculateLifeSupportRating(rawInput)
+
+}
+
+internal fun calculateLifeSupportRating(rawInput: String): Int {
+    val lines = rawInput
         .split("\n")
         .map { it.chars().toArray().map { Char(it).toString() } }
 
@@ -13,6 +19,7 @@ fun main() {
 
     println("$oxrBin $oxr / $scrBin $scr / ${oxr * scr}")
 
+    return oxr * scr
 }
 
 private fun calculateRating(input: List<List<String>>, compare: (e1: Int, e2: Int) -> Boolean): String {
