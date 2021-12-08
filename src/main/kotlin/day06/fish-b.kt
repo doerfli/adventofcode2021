@@ -2,9 +2,13 @@ package day06
 
 fun main() {
     val inputRawLines = ClassLoader.getSystemResource("day06/input.txt").readText()
-    var fishState = inputRawLines.split(",").map { it.toInt() }
+    val count = calculateNumberOfFishB(inputRawLines, 256)
+    println(count)
+}
 
-    val days = 80
+internal fun calculateNumberOfFishB(inputRawLines: String, days: Int): ULong {
+    val fishState = inputRawLines.split(",").map { it.toInt() }
+
     val offSpringCount = mutableMapOf<Int, ULong>()
     val firstReproCycle = 9
     val reproCycle = 7
@@ -16,7 +20,7 @@ fun main() {
             var offspring = 0uL
             var t = day
             // calculate his own offspring
-            while(t < days) {
+            while (t < days) {
                 offspring += 1uL
                 if (offSpringCount.containsKey(t + firstReproCycle)) {
                     offspring += offSpringCount[t + firstReproCycle]!!
@@ -27,9 +31,7 @@ fun main() {
         }
     }
 
-    val count = fishState.size.toULong() + fishState.map { offSpringCount[it]!! }.sumOf { it }
-    println(count)
-
+    return fishState.size.toULong() + fishState.map { offSpringCount[it]!! }.sumOf { it }
 }
 
 private fun isLastDay(days: Int, day: Int) = days == day

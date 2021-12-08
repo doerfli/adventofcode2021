@@ -1,10 +1,12 @@
 package day06
 
 fun main() {
-    val inputRawLines = ClassLoader.getSystemResource("day06/sample.txt").readText()
-    var fishState = inputRawLines.split(",").map { it.toInt() }
+    val inputRawLines = ClassLoader.getSystemResource("day06/input.txt").readText()
+    print(calculateNumberOfFishA(inputRawLines, 80))
+}
 
-    val days = 80
+internal fun calculateNumberOfFishA(inputRawLines: String, days: Int): ULong {
+    var fishState = inputRawLines.split(",").map { it.toInt() }
 
     (1..days).forEach { day ->
         val newFish = mutableListOf<Int>()
@@ -22,5 +24,5 @@ fun main() {
         println("$day - ${fishState.size}")
     }
 
-
+    return fishState.size.toULong()
 }
