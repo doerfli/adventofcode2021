@@ -18,7 +18,9 @@ internal fun calculateLeastFuelCrabStyle(inputRawLines: String): Long {
     (minPos..maxPos).forEach { targetPos ->
         val totalFuel = initialCrabPositions
             .map { initialPos -> calculateFuelConsumptionCrabStyle(initialPos, targetPos) }
-            .sumOf { it }
+            .reduce { total, f ->
+                total + f
+            }
 
         if (totalFuel < bestFuel) {
             bestFuel = totalFuel
@@ -29,7 +31,14 @@ internal fun calculateLeastFuelCrabStyle(inputRawLines: String): Long {
     return bestFuel
 }
 
+val knownDistances = mutableMapOf<Long, Long>()
+
 fun calculateFuelConsumptionCrabStyle(initialPos: Long, targetPos: Long): Long {
     val dist = abs(targetPos - initialPos)
-    return (0L..dist).sum()
+    if (knownDistances.containsKey(dist)) {
+        return knownDistances[dist]!!
+    }
+    val sum = (0L..dist).sum()
+    knownDistances[dist] = sum
+    return sum
 }
