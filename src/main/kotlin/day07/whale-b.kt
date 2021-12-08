@@ -35,10 +35,5 @@ val knownDistances = mutableMapOf<Long, Long>()
 
 fun calculateFuelConsumptionCrabStyle(initialPos: Long, targetPos: Long): Long {
     val dist = abs(targetPos - initialPos)
-    if (knownDistances.containsKey(dist)) {
-        return knownDistances[dist]!!
-    }
-    val sum = (0L..dist).sum()
-    knownDistances[dist] = sum
-    return sum
+    return knownDistances.getOrPut(dist) { (0L..dist).sum() }
 }
