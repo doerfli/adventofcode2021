@@ -1,7 +1,14 @@
 package day01
 
 fun main() {
-    val values = ClassLoader.getSystemResource("day01/input.txt").readText()
+    val input = ClassLoader.getSystemResource("day01/input.txt").readText()
+    val increments = calculateIncrements(input)
+
+    println(increments)
+}
+
+internal fun calculateIncrements(input: String): Int {
+    val values = input
         .split("\n")
         .filter { "" != it.trim() }
         .map { l -> l.toInt() }
@@ -13,6 +20,5 @@ fun main() {
                 values[i] < e
             }
         }.count { it() }
-
-    println(increments)
+    return increments
 }
