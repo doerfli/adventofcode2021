@@ -55,7 +55,7 @@ private fun isLowerThanNeighbour(neighbour: Field, field: Field): Boolean {
     return true
 }
 
-private fun printMap(heightMap: List<List<Field>>) {
+internal fun printMap(heightMap: List<List<Field>>) {
     heightMap.forEach { row ->
         run {
             row.forEach { field ->
@@ -66,10 +66,10 @@ private fun printMap(heightMap: List<List<Field>>) {
     }
 }
 
-private fun heightMap(inputRawLines: String): List<List<Field>> {
+internal fun heightMap(inputRawLines: String): List<List<Field>> {
     val heightMap = inputRawLines.split("\n")
-        .map { row -> row.toCharArray().map { char -> Field(char.toString().toInt(), true) } }
+        .mapIndexed { y, row -> row.toCharArray().mapIndexed{ x, char -> Field(x, y, char.toString().toInt()) } }
     return heightMap
 }
 
-data class Field(val height: Int, var isCandiate: Boolean)
+data class Field(val x: Int, val y: Int, val height: Int, var isCandiate: Boolean = true, var basinLabel: Int = -1)

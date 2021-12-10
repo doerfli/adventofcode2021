@@ -15,4 +15,14 @@ class SmokeTest : FunSpec({
         lowPointRisk(inputRawLines) shouldBe 545
     }
 
+    test("basinScore sample") {
+        val inputRawLines = ClassLoader.getSystemResource("day09/sample.txt").readText()
+        basinScore(inputRawLines) shouldBe 1134
+    }
+
+    test("basinScore input") {
+        val inputRawLines = ClassLoader.getSystemResource("day09/input.txt").readText()
+        basinScore(inputRawLines) shouldBe 950600
+    }
+
 })
