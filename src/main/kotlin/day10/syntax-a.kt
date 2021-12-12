@@ -17,12 +17,30 @@ internal fun syntaxScore(inputRawLines: String): Int {
 }
 
 fun parseLine(chunks: List<String>): Int {
-    val openChunks = mutableListOf<String>()
-    var unmatched: Optional<String> = Optional.empty()
 
-    chunker@ for (chunk in chunks) {
-        when(chunk) {
-            "(","[","{","<" -> openChunks.push(chunk)
+    val corruptChar = findCorruptChar(chunks)
+
+    if (corruptChar.isEmpty) {
+        return 0
+    }
+
+    return when(corruptChar.get()) {
+        ")" -> 3
+        "]" -> 57
+        "}" -> 1197
+        ">" -> 25137
+        else -> throw IllegalArgumentException("unexpected char ${corruptChar.get()}")
+    }
+}
+
+private fun findCorruptChar(
+    chunks: List<String>
+): Optional<String> {
+    val openChunks = mutableListOf<String>()
+
+    for (chunk in chunks) {
+        when (chunk) {
+            "(", "[", "{", "<" -> openChunks.push(chunk)
             else -> {
                 val opener = openChunks.pop()
                 if ("(" == opener && ")" == chunk) {
@@ -35,22 +53,10 @@ fun parseLine(chunks: List<String>): Int {
                     // do nothing
                 } else {
                     // unmatched
-                    unmatched = Optional.of(chunk)
-                    break@chunker
+                    return Optional.of(chunk)
                 }
             }
         }
     }
-
-    if (unmatched.isEmpty) {
-        return 0
-    }
-
-    return when(unmatched.get()) {
-        ")" -> 3
-        "]" -> 57
-        "}" -> 1197
-        ">" -> 25137
-        else -> throw IllegalArgumentException("unexpected char ${unmatched.get()}")
-    }
+    return Optional.empty()
 }
