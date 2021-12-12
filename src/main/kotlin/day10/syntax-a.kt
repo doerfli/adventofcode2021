@@ -22,10 +22,7 @@ fun parseLine(chunks: List<String>): Int {
 
     chunker@ for (chunk in chunks) {
         when(chunk) {
-            "(" -> openChunks.push(chunk)
-            "[" -> openChunks.push(chunk)
-            "{" -> openChunks.push(chunk)
-            "<" -> openChunks.push(chunk)
+            "(","[","{","<" -> openChunks.push(chunk)
             else -> {
                 val opener = openChunks.pop()
                 if ("(" == opener && ")" == chunk) {
@@ -54,6 +51,6 @@ fun parseLine(chunks: List<String>): Int {
         "]" -> 57
         "}" -> 1197
         ">" -> 25137
-        else -> throw IllegalArgumentException("unexpectec char ${unmatched.get()}")
+        else -> throw IllegalArgumentException("unexpected char ${unmatched.get()}")
     }
 }
