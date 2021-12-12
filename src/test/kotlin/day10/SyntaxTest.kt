@@ -15,4 +15,14 @@ class SyntaxTest : FunSpec({
         syntaxScore(inputRawLines) shouldBe 343863
     }
 
+    test("completionScore sample") {
+        val inputRawLines = ClassLoader.getSystemResource("day10/sample.txt").readText()
+        completionScore(inputRawLines) shouldBe 288957
+    }
+
+    test("completionScore input") {
+        val inputRawLines = ClassLoader.getSystemResource("day10/input.txt").readText()
+        completionScore(inputRawLines) shouldBe 2924734236L
+    }
+
 })

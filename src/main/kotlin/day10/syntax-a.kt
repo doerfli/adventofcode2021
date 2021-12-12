@@ -33,7 +33,7 @@ fun parseLine(chunks: List<String>): Int {
     }
 }
 
-private fun findCorruptChar(
+fun findCorruptChar(
     chunks: List<String>
 ): Optional<String> {
     val openChunks = mutableListOf<String>()
