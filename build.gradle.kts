@@ -13,7 +13,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-assertions-core:5.0.2")
-    testImplementation("io.kotest:kotest-runner-junit5:5.0.1")
+    testImplementation("io.kotest:kotest-runner-junit5:5.0.2")
 }
 
 tasks.test {
