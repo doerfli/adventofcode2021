@@ -3,7 +3,7 @@ package day11
 import util.pop
 
 fun main() {
-    val inputRawLines = ClassLoader.getSystemResource("day10/input.txt").readText()
+    val inputRawLines = ClassLoader.getSystemResource("day11/input.txt").readText()
     print(simulateOctopusSteps(inputRawLines, 100))
 }
 
@@ -15,7 +15,7 @@ internal fun simulateOctopusSteps(inputRawLines: String, steps: Int): Int {
     }.sum()
 }
 
-private fun executeStep(map: List<List<Octopus>>, step: Int): Int {
+internal fun executeStep(map: List<List<Octopus>>, step: Int): Int {
     // increment all by one
     map.flatten().forEach { octopus -> octopus.increase() }
 

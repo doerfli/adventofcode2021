@@ -15,4 +15,14 @@ class OctopusTest : FunSpec({
         simulateOctopusSteps(inputRawLines, 100) shouldBe 1637
     }
 
+    test("findStepWhereAllFlash sample") {
+        val inputRawLines = ClassLoader.getSystemResource("day11/sample.txt").readText()
+        findStepWhereAllFlash(inputRawLines) shouldBe 195
+    }
+
+    test("findStepWhereAllFlash input") {
+        val inputRawLines = ClassLoader.getSystemResource("day11/input.txt").readText()
+        findStepWhereAllFlash(inputRawLines) shouldBe 1637
+    }
+
 })
