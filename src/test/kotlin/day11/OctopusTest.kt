@@ -22,7 +22,7 @@ class OctopusTest : FunSpec({
 
     test("findStepWhereAllFlash input") {
         val inputRawLines = ClassLoader.getSystemResource("day11/input.txt").readText()
-        findStepWhereAllFlash(inputRawLines) shouldBe 1637
+        findStepWhereAllFlash(inputRawLines) shouldBe 242
     }
 
 })
