@@ -25,4 +25,19 @@ class PathsTest : FunSpec({
         findPaths(inputRawLines) shouldBe 3497
     }
 
+    test("findPathsSpecial sample") {
+        val inputRawLines = ClassLoader.getSystemResource("day12/sample.txt").readText()
+        findPathsSpecial(inputRawLines) shouldBe 36
+    }
+
+    test("findPathsSpecial sample3") {
+        val inputRawLines = ClassLoader.getSystemResource("day12/sample3.txt").readText()
+        findPathsSpecial(inputRawLines) shouldBe 3509
+    }
+
+    test("findPathsSpecial input") {
+        val inputRawLines = ClassLoader.getSystemResource("day12/input.txt").readText()
+        findPathsSpecial(inputRawLines) shouldBe 93686
+    }
+
 })

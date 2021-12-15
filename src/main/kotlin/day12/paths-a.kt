@@ -16,7 +16,11 @@ internal fun findPaths(inputRawLines: String): Int {
     return paths.size
 }
 
-fun walk(current: Cave, foundPaths: MutableSet<List<Cave>>, visited: MutableList<Cave>) {
+private fun walk(current: Cave, foundPaths: MutableSet<List<Cave>>, visited: MutableList<Cave>) {
+    if (current is SmallCave && visited.contains(current)) {
+        return
+    }
+
     val nowVisited = visited.toMutableList()
     nowVisited.add(current)
 
@@ -27,9 +31,6 @@ fun walk(current: Cave, foundPaths: MutableSet<List<Cave>>, visited: MutableList
 
     current.neighbours.forEach { cave ->
         // check if not visited before
-        if (cave is SmallCave && nowVisited.contains(cave)) {
-            return@forEach
-        }
         walk(cave, foundPaths, nowVisited)
     }
 }
@@ -45,7 +46,7 @@ fun parseInput(lines: List<String>): Map {
         node2.neighbours.add(node1)
     }
 
-    return Map(nodes["start"]!!)
+    return Map(nodes["start"]!!, nodes.values.filterIsInstance<SmallCave>())
 }
 
 fun createCave(s: String): Cave {
@@ -56,7 +57,7 @@ fun createCave(s: String): Cave {
     }
 }
 
-data class Map(val entrance: Cave)
+data class Map(val entrance: Cave, val smallCaves: List<Cave>)
 sealed class Cave(val name: String, val neighbours: MutableList<Cave>)
 class SmallCave(name: String, neighbours: MutableList<Cave>): Cave(name, neighbours)
 class BigCave(name: String, neighbours: MutableList<Cave>): Cave(name, neighbours)
