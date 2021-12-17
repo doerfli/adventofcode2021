@@ -63,5 +63,13 @@ fun parseInput(inputRawLines: String): Pair<Paper, Instructions> {
 data class Instructions(val folds: List<Fold>)
 data class Fold(val direction: String, val position: Int)
 
-data class Paper(val dots: List<Dot>)
+data class Paper(val dots: List<Dot>) {
+    fun maxX(): Int {
+        return dots.maxOf { it.x }
+    }
+
+    fun maxY(): Int {
+        return dots.maxOf { it.y }
+    }
+}
 data class Dot(val x: Int, val y: Int)
