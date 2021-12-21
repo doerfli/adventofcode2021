@@ -12,7 +12,7 @@ class ChitonTest : FunSpec({
 
     test("findPath input") {
         val inputRawLines = ClassLoader.getSystemResource("day15/input.txt").readText()
-        findPath(inputRawLines) shouldBe 531
+        findPath(inputRawLines) shouldBe 527
     }
 
 })
