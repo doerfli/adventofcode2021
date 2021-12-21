@@ -27,7 +27,7 @@ internal fun findPath(inputRawLines: String): Int {
 
         if (x == 0 && y == 0) {
             if (nextStep.lastPosValue < bestPathValue[y][x]) {
-                println(nextStep.lastPosValue)
+//                println(nextStep.lastPosValue)
                 bestPathValue[y][x] = nextStep.lastPosValue
                 stepsToTake.removeAll { it.lastPosValue > nextStep.lastPosValue }
             }
@@ -36,7 +36,7 @@ internal fun findPath(inputRawLines: String): Int {
 
         val newPosValue = nextStep.lastPosValue + map[y][x].value
 
-        if (newPosValue > bestPathValue[0][0]) {
+        if (newPosValue >= bestPathValue[0][0]) {
             continue
         }
         if (newPosValue >= bestPathValue[y][x]) {
